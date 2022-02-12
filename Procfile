@@ -1,1 +1,1 @@
-web: gunicorn auto_chess.wsgi
+web: gunicorn auto_chess.auto_chess.wsgi
