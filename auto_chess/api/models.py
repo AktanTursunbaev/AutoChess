@@ -15,7 +15,7 @@ class Hero(models.Model):
     mana = models.IntegerField()
     minimum_damage = models.IntegerField()
     maximum_damage = models.IntegerField()
-    attack_speed = models.DecimalField()
+    attack_speed = models.DecimalField(decimal_places=2, max_digits=5)
     movement_speed = models.IntegerField()
     attack_range = models.IntegerField()
     magic_resistance = models.IntegerField()
