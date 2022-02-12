@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'api',
+    'auto_chess.api.apps',
     'rest_framework',
     # 'channels',
 ]
@@ -53,7 +53,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'auto_chess.urls'
+ROOT_URLCONF = 'auto_chess.auto_chess.urls'
 
 TEMPLATES = [
     {
