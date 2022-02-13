@@ -53,7 +53,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'auto_chess.auto_chess.urls'
+ROOT_URLCONF = 'auto_chess.urls'
 
 TEMPLATES = [
     {
@@ -71,7 +71,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'auto_chess.wsgi.application'
+WSGI_APPLICATION = 'wsgi.application'
 
 
 # Database
