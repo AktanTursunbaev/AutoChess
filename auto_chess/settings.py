@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'auto_chess.api.apps',
+    'api',
     'rest_framework',
     # 'channels',
 ]
