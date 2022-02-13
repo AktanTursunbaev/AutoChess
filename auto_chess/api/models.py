@@ -25,7 +25,19 @@ class Hero(models.Model):
 class Ability(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField()
+    hero = models.ForeignKey(Hero, on_delete=models.CASCADE, related_name='abilities')
+
+
+class Item(models.Model):
+    name = models.CharField(max_length=50)
 
 
 class Match(models.Model):
     duration = models.TimeField()
+    players = models.ManyToManyField(Player, through='MatchInformation')
+
+
+class MatchInformation(models.Model):
+    player = models.ForeignKey(Player, on_delete=models.CASCADE)
+    match = models.ForeignKey(Match, on_delete=models.CASCADE)
+    heroes = models.ManyToManyField(Hero)
