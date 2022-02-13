@@ -27,3 +27,4 @@ txaio==21.2.1
 typing_extensions==4.0.1
 zope.interface==5.4.0
 gunicorn
+whitenoise
