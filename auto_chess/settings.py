@@ -80,10 +80,10 @@ WSGI_APPLICATION = 'wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'auto_chess',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': '127.0.0.1',
+        'NAME': 'd6426p0mr5a3b0',
+        'USER': 'ohdgsrvpcoupxa',
+        'PASSWORD': 'e845629f3f35231a156d6fba7dbf92af4be9814ec51941fef35186dd97af997e',
+        'HOST': 'ec2-34-250-92-138.eu-west-1.compute.amazonaws.com',
         'PORT': '5432',
     }
     # 'default': {
