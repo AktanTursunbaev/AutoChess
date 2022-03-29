@@ -11,3 +11,13 @@ class PlayerList(generics.ListCreateAPIView):
 class PlayerDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Player.objects.all()
     serializer_class = PlayerSerializer
+
+
+class HeroList(generics.ListCreateAPIView):
+    queryset = Hero.objects.all()
+    serializer_class = HeroSerializer
+
+
+class HeroDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Player.objects.all()
+    serializer_class = PlayerSerializer

@@ -6,6 +6,9 @@ class Player(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     rating = models.IntegerField()
 
+    def __str__(self):
+        return f'{self.user.username}'
+
 
 class Hero(models.Model):
     name = models.CharField(max_length=50)
@@ -21,20 +24,38 @@ class Hero(models.Model):
     magic_resistance = models.IntegerField()
     armor = models.IntegerField()
 
+    class Meta:
+        verbose_name_plural = 'Heroes'
+
+    def __str__(self):
+        return f'{self.name}'
+
 
 class Ability(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField()
     hero = models.ForeignKey(Hero, on_delete=models.CASCADE, related_name='abilities')
 
+    class Meta:
+        verbose_name_plural = 'Abilities'
+
+    def __str__(self):
+        return f'{self.name}'
+
 
 class Item(models.Model):
     name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return f'{self.name}'
 
 
 class Match(models.Model):
     duration = models.TimeField()
     players = models.ManyToManyField(Player, through='MatchInformation')
+
+    class Meta:
+        verbose_name_plural = 'Matches'
 
 
 class MatchInformation(models.Model):
