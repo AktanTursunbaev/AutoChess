@@ -12,6 +12,21 @@ class PlayerList(generics.ListCreateAPIView):
     queryset = Player.objects.all()
     serializer_class = PlayerSerializer
 
+    def post(self, request, *args, **kwargs):
+        user = User.objects.create_user(
+            username=request.POST.get('user.username'),
+            first_name=request.POST.get('user.first_name'),
+            last_name=request.POST.get('user.last_name'),
+            email=request.POST.get('user.email'),
+            password=request.POST.get('user.password')
+        )
+        player = Player.objects.create(user=user, rating=request.POST.get('rating'))
+        token, created = Token.objects.get_or_create(user=user)
+        return Response({
+            'token': token.key,
+            'player': PlayerSerializer(player).data
+        })
+
 
 class PlayerDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Player.objects.all()
