@@ -7,4 +7,5 @@ urlpatterns = [
     path('players/<int:pk>', PlayerDetail.as_view()),
     path('heroes/', HeroList.as_view()),
     path('heroes/<int:pk>', HeroDetail.as_view()),
+    path('auth/', AuthToken.as_view()),
 ]
