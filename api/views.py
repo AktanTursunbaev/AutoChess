@@ -33,6 +33,11 @@ class PlayerDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = PlayerSerializer
     permission_classes = [IsAuthenticated]
 
+    def retrieve(self, request, pk=None, *args, **kwargs):
+        if request.user and pk == 'me':
+            return Response(PlayerSerializer(Player.objects.get(user=request.user)).data)
+        return super(PlayerDetail, self).retrieve(request, pk, *args, **kwargs)
+
 
 class HeroList(generics.ListCreateAPIView):
     queryset = Hero.objects.all()

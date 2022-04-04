@@ -73,7 +73,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'auto_chess.wsgi.application'
+WSGI_APPLICATION = 'wsgi.application'
 
 
 # Database
