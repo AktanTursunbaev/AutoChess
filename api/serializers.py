@@ -16,6 +16,7 @@ class PlayerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Player
         fields = ['user', 'rating']
+        read_only_fields = ['rating']
 
     def create(self, validated_data):
         user = User(

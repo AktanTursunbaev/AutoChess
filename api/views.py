@@ -20,7 +20,7 @@ class PlayerList(generics.ListCreateAPIView):
             email=request.POST.get('user.email'),
             password=request.POST.get('user.password')
         )
-        player = Player.objects.create(user=user, rating=request.POST.get('rating'))
+        player = Player.objects.create(user=user, rating=1000)
         token, created = Token.objects.get_or_create(user=user)
         return Response({
             'token': token.key,
