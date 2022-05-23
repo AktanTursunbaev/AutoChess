@@ -24,9 +24,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-(aa*xj=7eg$@hxzqh4m$2cuin6!_6k3iyy(@lj^0n8y@kc)cwp'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
+
+CSRF_TRUSTED_ORIGINS = ['https://*.herokuapp.com', 'http://*.127.0.0.1']
 
 
 # Application definition
@@ -41,7 +43,8 @@ INSTALLED_APPS = [
     'api',
     'rest_framework',
     'rest_framework.authtoken',
-    # 'channels',
+    'channels',
+    'django_celery_beat',
 ]
 
 MIDDLEWARE = [
@@ -73,8 +76,9 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'wsgi.application'
+WSGI_APPLICATION = 'auto_chess.wsgi.application'
 
+ASGI_APPLICATION = 'auto_chess.asgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
@@ -82,10 +86,10 @@ WSGI_APPLICATION = 'wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'd2ebdil43asdl3',
-        'USER': 'fnujyqdintlayh',
-        'PASSWORD': '2723e714e29b0b92d38636cec90d25e5ddd95559d64062e059409db79f0fcf6d',
-        'HOST': 'ec2-99-80-73-211.eu-west-1.compute.amazonaws.com',
+        'NAME': os.getenv('DATABASE_NAME'),
+        'USER': os.getenv('DATABASE_USER'),
+        'PASSWORD': os.getenv('DATABASE_PASSWORD'),
+        'HOST': os.getenv('DATABASE_HOST'),
         'PORT': '5432',
     }
     # 'default': {
@@ -144,3 +148,31 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ]
 }
+
+REDIS_URL = os.environ.get('REDIS_URL')
+
+REDIS_MATCHMAKING_QUEUE = 'matchmaking_queue'
+REDIS_MATCHMAKING_GROUP_RATING = 'matchmaking_group_rating'
+REDIS_MATCHMAKING_GROUP_RATING_DIFFERENCE = 'matchmaking_group_rating_difference'
+REDIS_MATCHMAKING_GROUP_TIME = 'matchmaking_group_time'
+REDIS_MATCHMAKING_GROUP_SIZE = 'matchmaking_group_size'
+REDIS_MATCHMAKING_GROUP_MAP = 'matchmaking_group_map'
+REDIS_MATCHMAKING_GROUP_TIMEOUT = 3
+REDIS_LAST_ROUND = 'last_round'
+REDIS_HEALTH_DECREASED = 'health_decreased'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [REDIS_URL],
+        },
+    },
+}
+
+RATING_DIFFERENCE_RANGE = 100
+RATING_EXPANSION_DELTA = 2
+MAXIMUM_RATING_DIFFERENCE_RANGE = 400
+MAXIMUM_RATING_GAIN = 25
+
+CELERY_BROKER_URL = os.environ.get('REDIS_URL')
